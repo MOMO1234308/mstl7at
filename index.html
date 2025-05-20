@@ -172,6 +172,7 @@
             box-shadow: 0 0 30px rgba(0, 122, 255, 0.8);
         }
         
+        /* تصميم iPhone 14 Pro Max */
         .iphone-modal {
             display: none;
             position: fixed;
@@ -179,42 +180,49 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 300px;
+            max-width: 320px;
             background: #111;
-            border-radius: 40px;
-            box-shadow: 0 0 0 10px #222, 
-                        0 0 0 12px #444, 
-                        0 0 30px rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 0 0 15px #111, 
+                        0 0 0 17px #333, 
+                        0 0 40px rgba(0, 0, 0, 0.8);
             z-index: 1000;
             padding: 15px;
         }
         
-        @media (min-width: 768px) {
-            .iphone-modal {
-                max-width: 320px;
-            }
-        }
-        
         .iphone-notch {
-            width: 50%;
-            height: 20px;
+            width: 120px;
+            height: 35px;
             background: #111;
-            margin: -15px auto 10px auto;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
+            margin: -15px auto 15px auto;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
             position: relative;
             z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 5px;
+        }
+        
+        .dynamic-island {
+            width: 100px;
+            height: 30px;
+            background: #111;
+            border-radius: 30px;
+            position: relative;
         }
         
         .iphone-screen {
             background: linear-gradient(135deg, #1e2a78 0%, #000000 100%);
-            border-radius: 30px;
+            border-radius: 15px;
             padding: 15px;
-            height: 65vh;
-            max-height: 550px;
-            min-height: 400px;
+            height: 70vh;
+            max-height: 650px;
+            min-height: 500px;
             overflow-y: auto;
             border: 2px solid #444;
+            position: relative;
         }
         
         .iphone-button {
@@ -475,7 +483,9 @@
     </div>
     
     <div class="iphone-modal" id="iphoneModal">
-        <div class="iphone-notch"></div>
+        <div class="iphone-notch">
+            <div class="dynamic-island"></div>
+        </div>
         <button class="close-button" id="closeButton">×</button>
         <div class="iphone-screen">
             <div class="time-display" id="timeDisplay"></div>
