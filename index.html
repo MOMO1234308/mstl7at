@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مدينة ميثكل - ترحب بكم</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background-color: #000;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .space-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .shooting-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px #fff;
+            animation: shooting 5s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes shooting {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(1000px, 500px);
+                opacity: 0;
+            }
+        }
+        
+        .palestine-flag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(to bottom, 
+                #000000 0%, 
+                #000000 33%, 
+                #ffffff 33%, 
+                #ffffff 66%, 
+                #149954 66%, 
+                #149954 100%);
+            border: 1px solid #fff;
+            z-index: 10;
+        }
+        
+        .palestine-flag:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 100%;
+            background-color: #e4312b;
+        }
+        
+        .header-text {
+            color: white;
+            text-align: center;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: bold;
+            text-shadow: 0 0 10px #0077ff;
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .header-text span {
+            color: #ffcc00;
+            font-size: 1.5em;
+        }
+        
+        .content {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .phone-icon {
+            width: 60px;
+            height: 120px;
+            margin: 30px auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+            background: #111;
+            border-radius: 8px;
+            border: 3px solid #333;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (min-width: 768px) {
+            .phone-icon {
+                width: 80px;
+                height: 160px;
+            }
+        }
+        
+        .phone-icon:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 4px;
+            background: #333;
+            border-radius: 5px;
+        }
+        
+        .phone-icon:after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 25px;
+            border: 2px solid #333;
+            border-radius: 50%;
+        }
+        
+        .phone-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(0, 122, 255, 0.8);
+        }
+        
+        .iphone-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 300px;
+            background: #111;
+            border-radius: 40px;
+            box-shadow: 0 0 0 10px #222, 
+                        0 0 0 12px #444, 
+                        0 0 30px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            padding: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .iphone-modal {
+                max-width: 320px;
+            }
+        }
+        
+        .iphone-notch {
+            width: 50%;
+            height: 20px;
+            background: #111;
+            margin: -15px auto 10px auto;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .iphone-screen {
+            background: linear-gradient(135deg, #1e2a78 0%, #000000 100%);
+            border-radius: 30px;
+            padding: 15px;
+            height: 65vh;
+            max-height: 550px;
+            min-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #444;
+        }
+        
+        .iphone-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: linear-gradient(to bottom, #4a6ee0, #2a4ab0);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: clamp(14px, 3vw, 16px);
+            cursor: pointer;
+            box-shadow: 0 4px 0 #1a2a60;
+            transition: all 0.2s;
+        }
+        
+        .iphone-button:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+        
+        .iphone-button:hover {
+            background: linear-gradient(to bottom, #5a7ef0, #3a5ac0);
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+        }
+        
+        .terms-container, .guide-container, .settings-container {
+            display: none;
+            margin-top: 20px;
+            text-align: right;
+        }
+        
+        .term-box, .guide-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 10px;
+            margin: 10px 0;
+            border-right: 4px solid #4a6ee0;
+            backdrop-filter: blur(5px);
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+        
+        .term-title, .guide-title {
+            font-weight: bold;
+            color: #4a6ee0;
+            margin-bottom: 5px;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #444;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 3;
+        }
+        
+        .server-info {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: clamp(10px, 2vw, 12px);
+            text-align: center;
+            color: #aaa;
+            backdrop-filter: blur(2px);
+        }
+        
+        .time-display {
+            text-align: center;
+            font-size: clamp(12px, 3vw, 14px);
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #4a6ee0;
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 1001;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .welcome-modal h2 {
+            color: #4a6ee0;
+            margin-top: 0;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+        }
+        
+        .welcome-modal p {
+            font-size: clamp(14px, 3vw, 16px);
+        }
+        
+        .welcome-modal button {
+            background: linear-gradient(to bottom, #4a6ee0, #2a4ab0);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+        
+        .dark-mode {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%) !important;
+            color: #ccc !important;
+        }
+        
+        .dark-mode .iphone-screen {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%) !important;
+        }
+        
+        .dark-mode .term-box, .dark-mode .guide-box {
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+            margin-left: 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .switch {
+                width: 60px;
+                height: 34px;
+            }
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        @media (min-width: 768px) {
+            .slider:before {
+                height: 26px;
+                width: 26px;
+            }
+        }
+        
+        input:checked + .slider {
+            background-color: #4a6ee0;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+        
+        @media (min-width: 768px) {
+            input:checked + .slider:before {
+                transform: translateX(26px);
+            }
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            margin: 5px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: clamp(12px, 3vw, 14px);
+        }
+        
+        @media (min-width: 768px) {
+            .settings-item {
+                padding: 10px;
+            }
+        }
+        
+        /* منع التكبير على الهواتف */
+        @media (max-width: 767px) {
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="palestine-flag"></div>
+        <div class="space-background" id="spaceBackground">
+            <!-- النجوم والشهب ستضاف بالجافاسكريبت -->
+        </div>
+        <div class="header-text">
+            <span>M</span> مدينة ميثكل ترحب بكم
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="phone-icon" id="phoneIcon"></div>
+    </div>
+    
+    <div class="modal-overlay" id="modalOverlay"></div>
+    
+    <div class="welcome-modal" id="welcomeModal">
+        <h2>مرحباً بكم في مدينة ميثكل</h2>
+        <p>المبرمج هو Choji</p>
+        <p>نتمنى لكم تجربة ممتعة في مدينتنا</p>
+        <button id="closeWelcome">حسناً</button>
+    </div>
+    
+    <div class="iphone-modal" id="iphoneModal">
+        <div class="iphone-notch"></div>
+        <button class="close-button" id="closeButton">×</button>
+        <div class="iphone-screen">
+            <div class="time-display" id="timeDisplay"></div>
+            <button class="iphone-button" id="termsButton">مصطلحات المدينة</button>
+            <button class="iphone-button" id="guideButton">دليل المدينة</button>
+            <button class="iphone-button" id="settingsButton">الإعدادات</button>
+            
+            <div class="terms-container" id="termsContainer">
+                <div class="term-box">
+                    <div class="term-title">السيرفر</div>
+                    <div>يعني مدينة (سيرفر سامب CFW عربي)</div>
+                </div>
+                <div class="term-box">
+                    <div class="term-title">بطلع من المدينه</div>
+                    <div>معناه بروح انام</div>
+                </div>
+                <div class="term-box">
+                    <div class="term-title">قلتش</div>
+                    <div>سحر اسود</div>
+                </div>
+                <div class="term-box">
+                    <div class="term-title">صوت مزعج</div>
+                    <div>يعني احبالك مزعه</div>
+                </div>
+                <div class="term-box">
+                    <div class="term-title">هكر</div>
+                    <div>ساحر</div>
+                </div>
+                <div class="term-box">
+                    <div class="term-title">ادمن</div>
+                    <div>أمن وقائي</div>
+                </div>
+            </div>
+            
+            <div class="guide-container" id="guideContainer">
+                <div class="guide-box">
+                    <div class="guide-title">رول بلاي</div>
+                    <div>تقمص الحياة بشكل واقعي</div>
+                </div>
+                <div class="guide-box">
+                    <div class="guide-title">ميتا قيمنق</div>
+                    <div>أخذ معلومات من خارج المدينة وتطبيقها</div>
+                </div>
+                <div class="guide-box">
+                    <div class="guide-title">الدي ام</div>
+                    <div>قتل بدون سبب</div>
+                </div>
+                <div class="guide-box">
+                    <div class="guide-title">بوير قيمنق</div>
+                    <div>الهكر</div>
+                </div>
+                <div class="guide-box">
+                    <div class="guide-title">الحياة الجديدة</div>
+                    <div>حين فتح شخصيه جديده يمنع تذكر احداث الشخصيه الجديده</div>
+                </div>
+            </div>
+            
+            <div class="settings-container" id="settingsContainer">
+                <div class="settings-item">
+                    <span>النمط الليلي</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span>إشعارات</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-item">
+                    <span>الأصوات</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="server-info">
+                سيرفر سامب CFW عربي - إصدار 1.0<br>
+                المبرمج: Choji
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // إنشاء النجوم
+            const spaceBg = document.getElementById('spaceBackground');
+            for (let i = 0; i < 300; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() + 's';
+                star.style.animationDuration = Math.random() * 2 + 1 + 's';
+                spaceBg.appendChild(star);
+            }
+            
+            // إنشاء الشهب
+            for (let i = 0; i < 5; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.classList.add('shooting-star');
+                shootingStar.style.left = Math.random() * 20 + '%';
+                shootingStar.style.top = Math.random() * 20 + '%';
+                shootingStar.style.animationDelay = Math.random() * 10 + 's';
+                shootingStar.style.animationDuration = Math.random() * 5 + 3 + 's';
+                spaceBg.appendChild(shootingStar);
+            }
+            
+            // عناصر الواجهة
+            const phoneIcon = document.getElementById('phoneIcon');
+            const iphoneModal = document.getElementById('iphoneModal');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const closeButton = document.getElementById('closeButton');
+            const termsButton = document.getElementById('termsButton');
+            const termsContainer = document.getElementById('termsContainer');
+            const guideButton = document.getElementById('guideButton');
+            const guideContainer = document.getElementById('guideContainer');
+            const settingsButton = document.getElementById('settingsButton');
+            const settingsContainer = document.getElementById('settingsContainer');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const welcomeModal = document.getElementById('welcomeModal');
+            const closeWelcome = document.getElementById('closeWelcome');
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            
+            // عرض رسالة الترحيب عند الدخول
+            setTimeout(() => {
+                welcomeModal.style.display = 'block';
+                modalOverlay.style.display = 'block';
+            }, 1000);
+            
+            // تحديث الوقت
+            function updateTime() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                timeDisplay.textContent = `${hours}:${minutes}`;
+            }
+            
+            setInterval(updateTime, 1000);
+            updateTime();
+            
+            // أحداث النقر
+            phoneIcon.addEventListener('click', function() {
+                iphoneModal.style.display = 'block';
+                modalOverlay.style.display = 'block';
+            });
+            
+            closeButton.addEventListener('click', function() {
+                iphoneModal.style.display = 'none';
+                modalOverlay.style.display = 'none';
+                termsContainer.style.display = 'none';
+                guideContainer.style.display = 'none';
+                settingsContainer.style.display = 'none';
+            });
+            
+            modalOverlay.addEventListener('click', function() {
+                iphoneModal.style.display = 'none';
+                modalOverlay.style.display = 'none';
+                termsContainer.style.display = 'none';
+                guideContainer.style.display = 'none';
+                settingsContainer.style.display = 'none';
+                welcomeModal.style.display = 'none';
+            });
+            
+            termsButton.addEventListener('click', function() {
+                termsContainer.style.display = termsContainer.style.display === 'block' ? 'none' : 'block';
+                guideContainer.style.display = 'none';
+                settingsContainer.style.display = 'none';
+            });
+            
+            guideButton.addEventListener('click', function() {
+                guideContainer.style.display = guideContainer.style.display === 'block' ? 'none' : 'block';
+                termsContainer.style.display = 'none';
+                settingsContainer.style.display = 'none';
+            });
+            
+            settingsButton.addEventListener('click', function() {
+                settingsContainer.style.display = settingsContainer.style.display === 'block' ? 'none' : 'block';
+                termsContainer.style.display = 'none';
+                guideContainer.style.display = 'none';
+            });
+            
+            closeWelcome.addEventListener('click', function() {
+                welcomeModal.style.display = 'none';
+                modalOverlay.style.display = 'none';
+            });
+            
+            darkModeToggle.addEventListener('change', function() {
+                document.body.classList.toggle('dark-mode');
+                document.querySelector('.iphone-screen').classList.toggle('dark-mode');
+            });
+            
+            // منع التكبير على الهواتف
+            document.addEventListener('touchmove', function (event) {
+                if (event.scale !== 1) { event.preventDefault(); }
+            }, { passive: false });
+        });
+    </script>
+</body>
+</html>
